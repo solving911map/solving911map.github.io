@@ -46,6 +46,11 @@ button,input,select{font:inherit;color:inherit}
 #map.lod2 .t-title,#map.lod2 .t-title_s,#map.lod2 .badge{display:none}
 #map .backdrop{opacity:.85}
 #map .bigl{display:none;cursor:pointer}
+#map a.pdflink{cursor:pointer}#map a.pdflink:focus{outline:none}
+#map a.pdflink text{text-decoration:none}#map a.pdflink:hover text,#map a.pdflink:focus-visible text{text-decoration:underline}
+#map a.pdflink .hc{stroke:var(--link);stroke-width:1.5}
+#map a.pdflink:hover .hc,#map a.pdflink:focus-visible .hc{stroke-width:3.5}
+#map a.pdflink:hover .bigt,#map a.pdflink:focus-visible .bigt{fill:var(--link)}
 #map.lod2 .bigl{display:inline}
 #map .bigbg{opacity:.8}
 #map.lod2 .centre{display:none}
@@ -4992,14 +4997,14 @@ dialog .notebox{background:var(--ui-bg2);border:1px solid var(--ui-line);border-
 <text x="-546.6" y="4612.8" text-anchor="middle" style="font-size:8.2px;font-weight:500;font-style:normal;fill:var(--hubtext)" class="t-hubsub">Outside this edition</text>
 </g>
 </g>
+<a href="https://solving911map.github.io/Solving-9-11-Connection-Map-1.pdf" target="_blank" rel="noopener noreferrer" class="pdflink"><title>Open the Solving 9/11 Summary PDF in a new tab</title>
 <g class="centre" data-id="CENTER">
 <circle cx="0" cy="0" r="78.0" style="fill:var(--center);" class="hc"/>
-<text x="0" y="-29.4" text-anchor="middle" style="font-size:17.0px;font-weight:700;font-style:normal;fill:var(--hubtext)" class="t-center">9/11 as</text>
-<text x="0" y="-9.8" text-anchor="middle" style="font-size:17.0px;font-weight:700;font-style:normal;fill:var(--hubtext)" class="t-center">framed in</text>
-<text x="0" y="9.7" text-anchor="middle" style="font-size:17.0px;font-weight:700;font-style:normal;fill:var(--hubtext)" class="t-center">&#x27;Solving 9-11&#x27;</text>
-<text x="0" y="29.0" text-anchor="middle" style="font-size:9.0px;font-weight:500;font-style:normal;fill:var(--hubtext)" class="t-centersub">Christopher Bollyn</text>
-<text x="0" y="40.3" text-anchor="middle" style="font-size:9.0px;font-weight:500;font-style:normal;fill:var(--hubtext)" class="t-centersub">(2009–10 edition)</text>
+<text x="0" y="-14.0" text-anchor="middle" style="font-size:17.0px;font-weight:700;font-style:normal;fill:var(--hubtext)" class="t-center">Solving 9/11</text>
+<text x="0" y="5.6" text-anchor="middle" style="font-size:17.0px;font-weight:700;font-style:normal;fill:var(--hubtext)" class="t-center">Summary PDF</text>
+<text x="0" y="24.9" text-anchor="middle" style="font-size:9.0px;font-weight:500;font-style:normal;fill:var(--hubtext)" class="t-centersub">Opens in a new tab ↗</text>
 </g>
+</a>
 <g class="bigl" data-cl="PK">
 <rect x="89.9" y="4401.4" width="1019.0" height="330.9" rx="40" style="fill:var(--bg);" class="bigbg"/>
 <text x="599.4" y="4533.3" text-anchor="middle" style="font-size:112px;font-weight:700;font-style:normal;fill:var(--ink)" class="bigt">Prior-knowledge</text>
@@ -5121,10 +5126,13 @@ dialog .notebox{background:var(--ui-bg2);border:1px solid var(--ui-line);border-
 <text x="-546.6" y="4728.0" text-anchor="middle" style="font-size:112px;font-weight:700;font-style:normal;fill:var(--ink)" class="bigt">privatization</text>
 <text x="-546.6" y="4853.5" text-anchor="middle" style="font-size:112px;font-weight:700;font-style:normal;fill:var(--ink)" class="bigt">&amp; lawsuits</text>
 </g>
+<a href="https://solving911map.github.io/Solving-9-11-Connection-Map-1.pdf" target="_blank" rel="noopener noreferrer" class="pdflink"><title>Open the Solving 9/11 Summary PDF in a new tab</title>
 <g class="bigl centrel">
-<text x="0" y="-60" text-anchor="middle" style="font-size:120px;font-weight:700;font-style:normal;fill:var(--ink)" class="bigt">9/11 as framed in</text>
-<text x="0" y="75" text-anchor="middle" style="font-size:120px;font-weight:700;font-style:normal;fill:var(--ink)" class="bigt">&#x27;Solving 9-11&#x27;</text>
+<rect x="-900.1" y="-290.2" width="1800.2" height="580.4" rx="60" style="fill:var(--bg);stroke:var(--link);stroke-width:14;" class="bigbg"/>
+<text x="0" y="-63.0" text-anchor="middle" style="font-size:210px;font-weight:700;font-style:normal;fill:var(--ink)" class="bigt">Solving 9/11</text>
+<text x="0" y="172.2" text-anchor="middle" style="font-size:210px;font-weight:700;font-style:normal;fill:var(--ink)" class="bigt">Summary PDF ↗</text>
 </g>
+</a>
 </g>
 </svg>
 
@@ -5219,7 +5227,11 @@ function scaled(f){const cx=vb.x+vb.w/2,cy=vb.y+vb.h/2;return {x:cx-vb.w*f/2,y:c
 // ---------- selection
 const nodeEls={};svg.querySelectorAll('g.node').forEach(g=>nodeEls[g.dataset.id]=g);
 const hubEls={};svg.querySelectorAll('g.hub').forEach(g=>{const id=g.dataset.id;if(id&&id.startsWith('HUB_'))hubEls[id.slice(4)]=g;});
-function onClick(el){if(!el)return;const bl=el.closest&&el.closest('g.bigl');
+// centre hub links to the companion PDF; opened here because the map captures the pointer for panning
+let pdfAt=0;function openPdf(a){pdfAt=Date.now();window.open(a.getAttribute('href'),'_blank','noopener,noreferrer');}
+svg.querySelectorAll('a.pdflink').forEach(a=>a.addEventListener('click',e=>{if(Date.now()-pdfAt<1000)e.preventDefault();}));
+function onClick(el){if(!el)return;const pa=el.closest&&el.closest('a.pdflink');if(pa){openPdf(pa);return;}
+  const bl=el.closest&&el.closest('g.bigl');
   if(bl){ if(bl.dataset.cl) showCluster(bl.dataset.cl,true); else openAbout(); return;}
   const g=el.closest&&el.closest('g.node,g.hub,g.centre');
   if(!g){clearSel();return;}
